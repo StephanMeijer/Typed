@@ -24,6 +24,7 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
+        extensions: pcov
         php-version: ${{ matrix.php-versions }}
 
     - name: Validate composer.json and composer.lock
