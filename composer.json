@@ -1,9 +1,8 @@
 {
     "name": "stephanmeijer/typed",
-    "version": "0.0.1",
     "description": "Ensure your value's type",
     "type": "library",
-    "license": "GPL-3.0",
+    "license": "GPL-3.0-or-later",
     "require": {
         "php": ">=8.0"
     },
