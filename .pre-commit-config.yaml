@@ -1,0 +1,27 @@
+fail_fast: true
+
+repos:
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.2.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: [build, chore, ci, docs, feat, fix, perf, refactor, revert, style, test, merge]
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: 'web/'
+      - id: end-of-file-fixer
+        exclude: 'web/'
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-symlinks
+      - id: detect-private-key
+      - id: forbid-submodules
+      - id: mixed-line-ending
+        args: [ '--fix=lf' ]
+      - id: check-yaml
+        exclude: '.gitlab-ci.*'
+      - id: check-json
+        exclude: 'web/|.eslintrc.json'

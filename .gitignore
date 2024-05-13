@@ -1,0 +1,12 @@
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+clover.xml
+/coverage/
+/vendor/
+.phpunit.cache
+coverage.txt
+
+.DS_Store
