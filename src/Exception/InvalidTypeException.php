@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace StephanMeijer\Typed\Exception;
 
-use StephanMeijer\Typed\TypedString;
+use StephanMeijer\Typed\StrictString;
 
 class InvalidTypeException extends \Exception
 {

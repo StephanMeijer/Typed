@@ -6,12 +6,12 @@ namespace StephanMeijer\Typed;
 
 use StephanMeijer\Typed\Exception\InvalidTypeException;
 
-class TypedInt
+class StrictInt
 {
     /**
      * @throws InvalidTypeException
      */
-    public static function cast(mixed $value): int
+    public static function enforce(mixed $value): int
     {
         if (is_int($value)) {
             return $value;
@@ -23,7 +23,7 @@ class TypedInt
     /**
      * @throws InvalidTypeException
      */
-    public static function castNullable(mixed $value): ?int
+    public static function enforceNullable(mixed $value): ?int
     {
         if ($value === null || is_int($value)) {
             return $value;

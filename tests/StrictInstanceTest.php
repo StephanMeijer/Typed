@@ -9,70 +9,70 @@ use DateTimeZone;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use StephanMeijer\Typed\Exception\InvalidTypeException;
-use StephanMeijer\Typed\TypedInstance;
+use StephanMeijer\Typed\StrictInstance;
 
-#[CoversClass(TypedInstance::class)]
+#[CoversClass(StrictInstance::class)]
 #[CoversClass(InvalidTypeException::class)]
-class TypedInstanceTest extends TestCase
+class StrictInstanceTest extends TestCase
 {
     /**
      * @throws InvalidTypeException
      */
-    public function testCast(): void
+    public function testEnforce(): void
     {
         $instance = new DateTime();
 
-        $this->assertSame($instance, TypedInstance::cast($instance, DateTime::class));
+        $this->assertSame($instance, StrictInstance::enforce($instance, DateTime::class));
     }
 
     /**
      * @throws InvalidTypeException
      */
-    public function testCastThrowsOnFloat(): void
+    public function testEnforceThrowsOnFloat(): void
     {
         $this->expectExceptionObject(new InvalidTypeException('int', DateTime::class));
 
-        TypedInstance::cast(12345, DateTime::class);
+        StrictInstance::enforce(12345, DateTime::class);
     }
 
     /**
      * @throws InvalidTypeException
      */
-    public function testCastThrowsOnOtherClass(): void
+    public function testEnforceThrowsOnOtherClass(): void
     {
         $this->expectExceptionObject(new InvalidTypeException(DateTimeZone::class, DateTime::class));
 
-        TypedInstance::cast(new DateTimeZone("Europe/Amsterdam"), DateTime::class);
+        StrictInstance::enforce(new DateTimeZone("Europe/Amsterdam"), DateTime::class);
     }
 
     /**
      * @throws InvalidTypeException
      */
-    public function testCastNullable(): void
+    public function testEnforceNullable(): void
     {
         $instance = new DateTime();
 
-        $this->assertNull(TypedInstance::castNullable(null, DateTime::class));
-        $this->assertSame($instance, TypedInstance::castNullable($instance, DateTime::class));
+        $this->assertNull(StrictInstance::enforceNullable(null, DateTime::class));
+        $this->assertSame($instance, StrictInstance::enforceNullable($instance, DateTime::class));
     }
 
     /**
      * @throws InvalidTypeException
      */
-    public function testCastNullableThrows(): void
+    public function testEnforceNullableThrows(): void
     {
         $this->expectExceptionObject(new InvalidTypeException(DateTime::class, 'null|' . DateTimeZone::class));
 
-        TypedInstance::castNullable(new DateTime(), DateTimeZone::class);
+        StrictInstance::enforceNullable(new DateTime(), DateTimeZone::class);
     }
 
     /**
      * @throws InvalidTypeException
      */
-    public function testCastNullableThrowsOnOtherClass(): void
+    public function testEnforceNullableThrowsOnOtherClass(): void
     {
         $this->expectExceptionObject(new InvalidTypeException(DateTimeZone::class, 'null|' . DateTime::class));
 
-        TypedInstance::castNullable(new DateTimeZone("Europe/Amsterdam"), DateTime::class);
+        StrictInstance::enforceNullable(new DateTimeZone("Europe/Amsterdam"), DateTime::class);
     }
 }

@@ -7,46 +7,46 @@ namespace Tests\StephanMeijer\Typed;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use StephanMeijer\Typed\Exception\InvalidTypeException;
-use StephanMeijer\Typed\TypedString;
+use StephanMeijer\Typed\StrictString;
 
-#[CoversClass(TypedString::class)]
+#[CoversClass(StrictString::class)]
 #[CoversClass(InvalidTypeException::class)]
-class TypedStringTest extends TestCase
+class StrictStringTest extends TestCase
 {
     /**
      * @throws InvalidTypeException
      */
-    public function testCast(): void
+    public function testEnforce(): void
     {
-        $this->assertSame("Hello there", TypedString::cast("Hello there"));
+        $this->assertSame("Hello there", StrictString::enforce("Hello there"));
     }
 
     /**
      * @throws InvalidTypeException
      */
-    public function testCastThrows(): void
+    public function testEnforceThrows(): void
     {
         $this->expectExceptionObject(new InvalidTypeException('int', 'string'));
 
-        TypedString::cast(12345);
+        StrictString::enforce(12345);
     }
 
     /**
      * @throws InvalidTypeException
      */
-    public function testCastNullable(): void
+    public function testEnforceNullable(): void
     {
-        $this->assertNull(TypedString::castNullable(null));
-        $this->assertSame("Hello there", TypedString::cast("Hello there"));
+        $this->assertNull(StrictString::enforceNullable(null));
+        $this->assertSame("Hello there", StrictString::enforce("Hello there"));
     }
 
     /**
      * @throws InvalidTypeException
      */
-    public function testCastNullableThrows(): void
+    public function testEnforceNullableThrows(): void
     {
         $this->expectExceptionObject(new InvalidTypeException('int', 'null|string'));
 
-        TypedString::castNullable(1234);
+        StrictString::enforceNullable(1234);
     }
 }

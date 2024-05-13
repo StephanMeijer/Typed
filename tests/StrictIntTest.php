@@ -7,46 +7,46 @@ namespace Tests\StephanMeijer\Typed;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use StephanMeijer\Typed\Exception\InvalidTypeException;
-use StephanMeijer\Typed\TypedInt;
+use StephanMeijer\Typed\StrictInt;
 
-#[CoversClass(TypedInt::class)]
+#[CoversClass(StrictInt::class)]
 #[CoversClass(InvalidTypeException::class)]
-class TypedIntTest extends TestCase
+class StrictIntTest extends TestCase
 {
     /**
      * @throws InvalidTypeException
      */
-    public function testCast(): void
+    public function testEnforce(): void
     {
-        $this->assertSame(3, TypedInt::cast(3));
+        $this->assertSame(3, StrictInt::enforce(3));
     }
 
     /**
      * @throws InvalidTypeException
      */
-    public function testCastThrows(): void
+    public function testEnforceThrows(): void
     {
         $this->expectExceptionObject(new InvalidTypeException('double', 'int'));
 
-        TypedInt::cast(12345.3);
+        StrictInt::enforce(12345.3);
     }
 
     /**
      * @throws InvalidTypeException
      */
-    public function testCastNullable(): void
+    public function testEnforceNullable(): void
     {
-        $this->assertNull(TypedInt::castNullable(null));
-        $this->assertSame(3, TypedInt::cast(3));
+        $this->assertNull(StrictInt::enforceNullable(null));
+        $this->assertSame(3, StrictInt::enforce(3));
     }
 
     /**
      * @throws InvalidTypeException
      */
-    public function testCastNullableThrows(): void
+    public function testEnforceNullableThrows(): void
     {
         $this->expectExceptionObject(new InvalidTypeException('string', 'null|int'));
 
-        TypedInt::castNullable("x");
+        StrictInt::enforceNullable("x");
     }
 }

@@ -6,12 +6,12 @@ namespace StephanMeijer\Typed;
 
 use StephanMeijer\Typed\Exception\InvalidTypeException;
 
-class TypedFloat
+class StrictFloat
 {
     /**
      * @throws InvalidTypeException
      */
-    public static function cast(mixed $value): float
+    public static function enforce(mixed $value): float
     {
         if (is_float($value)) {
             return $value;
@@ -23,7 +23,7 @@ class TypedFloat
     /**
      * @throws InvalidTypeException
      */
-    public static function castNullable(mixed $value): ?float
+    public static function enforceNullable(mixed $value): ?float
     {
         if ($value === null || is_float($value)) {
             return $value;

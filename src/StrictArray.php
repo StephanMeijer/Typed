@@ -6,7 +6,7 @@ namespace StephanMeijer\Typed;
 
 use StephanMeijer\Typed\Exception\InvalidTypeException;
 
-class TypedArray
+class StrictArray
 {
     /**
      * @throws InvalidTypeException
@@ -14,7 +14,7 @@ class TypedArray
      * @param mixed $value
      * @return array<mixed, mixed>
      */
-    public static function cast(mixed $value): array
+    public static function enforce(mixed $value): array
     {
         if (is_array($value)) {
             return $value;
@@ -29,7 +29,7 @@ class TypedArray
      * @param mixed $value
      * @return null|array<mixed, mixed>
      */
-    public static function castNullable(mixed $value): ?array
+    public static function enforceNullable(mixed $value): ?array
     {
         if ($value === null || is_array($value)) {
             return $value;

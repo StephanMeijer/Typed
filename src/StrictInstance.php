@@ -6,7 +6,7 @@ namespace StephanMeijer\Typed;
 
 use StephanMeijer\Typed\Exception\InvalidTypeException;
 
-class TypedInstance
+class StrictInstance
 {
     /**
      * @template T of object
@@ -17,7 +17,7 @@ class TypedInstance
      *
      * @throws InvalidTypeException
      */
-    public static function cast(mixed $value, string $className): object
+    public static function enforce(mixed $value, string $className): object
     {
         if (is_object($value) && get_class($value) === $className) {
             return $value;
@@ -35,7 +35,7 @@ class TypedInstance
      *
      * @throws InvalidTypeException
      */
-    public static function castNullable(mixed $value, string $className): ?object
+    public static function enforceNullable(mixed $value, string $className): ?object
     {
         if ($value === null) {
             return null;

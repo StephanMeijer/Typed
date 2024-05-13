@@ -7,47 +7,47 @@ namespace Tests\StephanMeijer\Typed;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use StephanMeijer\Typed\Exception\InvalidTypeException;
-use StephanMeijer\Typed\TypedFloat;
+use StephanMeijer\Typed\StrictFloat;
 
-#[CoversClass(TypedFloat::class)]
+#[CoversClass(StrictFloat::class)]
 #[CoversClass(InvalidTypeException::class)]
-class TypedFloatTest extends TestCase
+class StrictFloatTest extends TestCase
 {
     /**
      * @throws InvalidTypeException
      */
-    public function testCast(): void
+    public function testEnforce(): void
     {
         $value = 3.1415;
-        $this->assertSame($value, TypedFloat::cast($value));
+        $this->assertSame($value, StrictFloat::enforce($value));
     }
 
     /**
      * @throws InvalidTypeException
      */
-    public function testCastThrows(): void
+    public function testEnforceThrows(): void
     {
         $this->expectExceptionObject(new InvalidTypeException('int', 'float'));
 
-        TypedFloat::cast(12345);
+        StrictFloat::enforce(12345);
     }
 
     /**
      * @throws InvalidTypeException
      */
-    public function testCastNullable(): void
+    public function testEnforceNullable(): void
     {
-        $this->assertNull(TypedFloat::castNullable(null));
-        $this->assertSame(3.14153, TypedFloat::cast(3.14153));
+        $this->assertNull(StrictFloat::enforceNullable(null));
+        $this->assertSame(3.14153, StrictFloat::enforce(3.14153));
     }
 
     /**
      * @throws InvalidTypeException
      */
-    public function testCastNullableThrows(): void
+    public function testEnforceNullableThrows(): void
     {
         $this->expectExceptionObject(new InvalidTypeException('int', 'null|float'));
 
-        TypedFloat::castNullable(1234);
+        StrictFloat::enforceNullable(1234);
     }
 }
