@@ -24,7 +24,6 @@ jobs:
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        extensions: pcov
         php-version: ${{ matrix.php-versions }}
 
     - name: Validate composer.json and composer.lock
@@ -43,7 +42,7 @@ jobs:
       run: composer install --prefer-dist --no-progress
 
     - name: PHPUnit
-      run: ./vendor/bin/phpunit
+      run: ./vendor/bin/phpunit --no-coverage
 
     - name: PHPStan
       run: ./vendor/bin/phpstan
