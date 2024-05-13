@@ -9,6 +9,8 @@ use StephanMeijer\Typed\Exception\InvalidTypeException;
 class StrictInt
 {
     /**
+     * @psalm-assert int $value
+     *
      * @throws InvalidTypeException
      */
     public static function enforce(mixed $value): int
@@ -21,6 +23,8 @@ class StrictInt
     }
 
     /**
+     * @psalm-assert null|int $value
+     *
      * @throws InvalidTypeException
      */
     public static function enforceNullable(mixed $value): ?int

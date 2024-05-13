@@ -11,6 +11,8 @@ class StrictArray
     /**
      * @throws InvalidTypeException
      *
+     * @psalm-assert array $value
+     *
      * @param mixed $value
      * @return array<mixed, mixed>
      */
@@ -25,6 +27,8 @@ class StrictArray
 
     /**
      * @throws InvalidTypeException
+     *
+     * @psalm-assert nuxll|array $value
      *
      * @param mixed $value
      * @return null|array<mixed, mixed>

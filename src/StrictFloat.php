@@ -9,6 +9,8 @@ use StephanMeijer\Typed\Exception\InvalidTypeException;
 class StrictFloat
 {
     /**
+     * @psalm-assert float $value
+     *
      * @throws InvalidTypeException
      */
     public static function enforce(mixed $value): float
@@ -21,6 +23,8 @@ class StrictFloat
     }
 
     /**
+     * @psalm-assert null|float $value
+     *
      * @throws InvalidTypeException
      */
     public static function enforceNullable(mixed $value): ?float

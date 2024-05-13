@@ -11,6 +11,8 @@ class StrictInstance
     /**
      * @template T of object
      *
+     * @psalm-assert T $value
+     *
      * @param mixed $value
      * @param class-string<T> $className
      * @return object
@@ -28,6 +30,8 @@ class StrictInstance
 
     /**
      * @template T of object
+     *
+     * @psalm-assert null|T $value
      *
      * @param mixed $value
      * @param class-string<T> $className

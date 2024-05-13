@@ -9,6 +9,8 @@ use StephanMeijer\Typed\Exception\InvalidTypeException;
 class StrictString
 {
     /**
+     * @psalm-assert string $value
+     *
      * @throws InvalidTypeException
      */
     public static function enforce(mixed $value): string
@@ -21,6 +23,8 @@ class StrictString
     }
 
     /**
+     * @psalm-assert null|string $value
+     *
      * @throws InvalidTypeException
      */
     public static function enforceNullable(mixed $value): ?string
