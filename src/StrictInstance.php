@@ -9,7 +9,7 @@ use StephanMeijer\Typed\Exception\InvalidTypeException;
 class StrictInstance
 {
     /**
-     * @template T
+     * @template T of object
      *
      * @psalm-assert T $value
      *
@@ -19,7 +19,7 @@ class StrictInstance
      *
      * @throws InvalidTypeException
      */
-    public static function enforce(mixed $value, string $className)
+    public static function enforce(mixed $value, string $className): object
     {
         if (is_object($value) && get_class($value) === $className) {
             return $value;
@@ -29,7 +29,7 @@ class StrictInstance
     }
 
     /**
-     * @template T
+     * @template T of object
      *
      * @psalm-assert null|T $value
      *
@@ -39,7 +39,7 @@ class StrictInstance
      *
      * @throws InvalidTypeException
      */
-    public static function enforceNullable(mixed $value, string $className)
+    public static function enforceNullable(mixed $value, string $className): ?object
     {
         if ($value === null) {
             return null;
