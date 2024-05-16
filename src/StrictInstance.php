@@ -15,11 +15,11 @@ class StrictInstance
      *
      * @param mixed $value
      * @param class-string<T> $className
-     * @return object
+     * @return T
      *
      * @throws InvalidTypeException
      */
-    public static function enforce(mixed $value, string $className): object
+    public static function enforce(mixed $value, string $className): mixed
     {
         if (is_object($value) && get_class($value) === $className) {
             return $value;
@@ -35,11 +35,11 @@ class StrictInstance
      *
      * @param mixed $value
      * @param class-string<T> $className
-     * @return ?object
+     * @return ?T
      *
      * @throws InvalidTypeException
      */
-    public static function enforceNullable(mixed $value, string $className): ?object
+    public static function enforceNullable(mixed $value, string $className): mixed
     {
         if ($value === null) {
             return null;
